@@ -12,4 +12,12 @@
     </strong>
     followers
   </a>
+  <%if company_user? || admin_user? %>
+    <a href="<%= fields_user_path(@user) %>">
+      <strong id="fieds" class="stat">
+        <%= @user.fields.count %>
+      </strong>
+      fields
+    </a>
+  <%end%>
 </div>

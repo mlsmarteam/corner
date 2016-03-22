@@ -1,0 +1,19 @@
+<% provide(:title, @field.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <h1>
+        <%= gravatar_for @field.user %>
+        <%= @field.user.name %>
+      </h1>
+    </section>
+  </aside>
+  <div class="col-md-8">
+   	<h1> <%=@field.name%> </h1> 
+   	<% if current_user?(@field.user) || admin_user? %>  
+   		<h3><span><%= link_to "Edit this field", edit_field_path %></span></h3>
+   	<%end%>
+   	<p>The field allows: <%= pluralize(@field.team_player,"player") %> per team. </p>
+   	<p>Description: <%=@field.description%></p>
+  </div>
+</div>

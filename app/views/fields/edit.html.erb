@@ -1,0 +1,20 @@
+<h1>Fields</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@field) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :team_player%>
+      <%= f.number_field :team_player,min: 1, placeholder: "Cantidad de jugadores por equipo..." %>
+	  <%= f.label :description%>
+      <%= f.text_area :description, placeholder: "Describe las característica de ésta instalación..." %>
+      <% if company_user? || admin_user? %>
+      <%= f.hidden_field :user_id %>
+      <%end%>
+      <%= f.submit "Create my field game", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

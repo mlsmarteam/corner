@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160320223605) do
+ActiveRecord::Schema.define(version: 20160321200051) do
+
+  create_table "fields", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "team_player"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+  end
+
+  add_index "fields", ["user_id"], name: "index_fields_on_user_id"
 
   create_table "microposts", force: :cascade do |t|
     t.text     "content"

@@ -1,0 +1,8 @@
+<li>
+  <%= gravatar_for field.user, size: 50 %>
+  <%=link_to field.name, field %>
+  <% if current_user?(field.user) || admin_user? %>
+    | <%= link_to "delete", field, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+  <% end %>
+</li>

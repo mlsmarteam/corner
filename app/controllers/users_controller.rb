@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    flash.now[:info] = "Please insert the basic info about you. We'll contact you inmediatelly."
     if params[:type]=='person'
       @user=User.new
       @user.person_user=true
@@ -28,7 +29,6 @@ class UsersController < ApplicationController
   
 
   def create
-  puts(user_params)
   @user = User.new(user_params)
   if @user.save
     @user.send_activation_email
@@ -75,6 +75,13 @@ class UsersController < ApplicationController
     @user  = User.find(params[:id])
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
+  end
+
+  def fields
+    @title  = 'Fields'
+    @user   = User.find(params[:id])
+    @fields = @user.fields.paginate(page:params[:page]) 
+    render 'show_field'
   end
 
 

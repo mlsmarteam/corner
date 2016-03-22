@@ -7,9 +7,9 @@ class UsersControllerTest < ActionController::TestCase
     @other_user = users(:archer)
   end
 
-  test "should get new" do
+  test "not should get new" do
     get :new
-    assert_response :success
+    assert_redirected_to choose_url
   end
 
   test "should redirect edit when not logged in" do
