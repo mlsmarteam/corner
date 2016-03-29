@@ -1,19 +1,167 @@
+<style type="text/css">
+ 
+
+</style>
+
+
+
 <% provide(:title, @field.name) %>
-<div class="row">
+
+<div class="row" data-role="page" id="index">
   <aside class="col-md-4">
     <section>
-      <h1>
+      <h3>
         <%= gravatar_for @field.user %>
         <%= @field.user.name %>
-      </h1>
+      </h3>
     </section>
   </aside>
-  <div class="col-md-8">
-   	<h1> <%=@field.name%> </h1> 
+  <div class="col-md-6">
+   	<h3> <%=@field.name%>  </h3> 
    	<% if current_user?(@field.user) || admin_user? %>  
-   		<h3><span><%= link_to "Edit this field", edit_field_path %></span></h3>
+   		<h3><span><%= link_to "Edit this field", edit_field_path %>-<%= link_to "Remove this field", field_path, method: "delete" %></span></h3>
    	<%end%>
    	<p>The field allows: <%= pluralize(@field.team_player,"player") %> per team. </p>
-   	<p>Description: <%=@field.description%></p>
+   	<p>Description: <%=@field.description%></p> 
   </div>
+  <div class="col-md-2">
+    <p align='left' > <%= link_to " Alquilar ahora ",'#', class: "btn btn-lg btn-primary" %></p>
+    <p align='left' > <%= link_to "Consultar ahora",'#', class: "btn btn-lg btn-primary" %></p>
+    
+  </div>
+  
+  
 </div>
+<button id='dd'>AQUI</button>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+<button id="opener">open the dialog</button>
+<div id="dialog1" title="Dialog Title" hidden="hidden">I'm a dialog</div>
+
+
+
+<div class='calendar'></div>
+<div id="dialog" title="My dialog" style="display:none">
+    <form>
+        <fieldset>
+            <label for="Id">Id</label>
+            <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
+            <label for="Id">Title</label>
+            <input type="text" name="title" id="title" class="text ui-widget-content ui-corner-all">
+        </fieldset>
+    </form>
+</div>
+
+<script type = "text/javascript">
+  /*
+    <% if admin_user? || company_user? %>
+      var options = {
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'agendaWeek,agendaDay'
+        },
+        height: 500 ,
+        slotMinutes: 30,
+        dragOpacity: 0.5,
+        eventColor: '#082E50',  
+        eventOverlap:false,
+        minTime: 7,
+        allDaySlot:false,
+        slotEventOverlap:false,
+        firstDay:5,
+        eventSources: [{
+        url: '/events/get_events'
+        }],
+        timeFormat: "h:mm t{ - h:mm t}"
+      };
+      <% else %>
+      var options = {
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'agendaWeek,agendaDay'
+        },
+        height: 500 ,
+        slotMinutes: 30,
+        dragOpacity: 0.5,
+        eventColor: '#218A04',
+        eventOverlap:false,
+        minTime: 7,
+        allDaySlot:false,
+        nowIndicator:true,
+        slotEventOverlap:false,
+        editable:false,
+        firstDay:5,
+        selectable:false,
+         eventClick:  function(event, jsEvent, view) {
+          
+          }
+      };     
+    
+    <% end %>
+    $('.calendar').fullCalendar($.extend(full_calendar_options,options));
+*/
+$(document).ready(function() {
+
+
+    $(function () {
+  $( "#dialog1" ).dialog({
+    autoOpen: false
+  });
+  
+  $("#opener").click(function() {
+    $("#dialog1").dialog('open');
+  });
+});
+    // page is now ready, initialize the calendar..
+    $('#dialog').on('click',function(){
+        $("#dds").dialog({
+                autoOpen: false,
+
+            });
+    });
+
+    $('.calendar').fullCalendar({
+        // put your options and callbacks here
+         theme: false,
+         defaultView:'agendaWeek',
+         header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'agendaWeek,agendaDay'
+        },
+        events: {
+          url:'/events/get_events',
+          type: 'POST',
+          data: {
+            field: <%=@field.id%>
+          },
+          error: function() {
+              alert('there was an error while fetching events!');
+          }
+        },
+        allDayText:'Estado',
+        minTime:'06:00:00', //Configuration data
+        maxTime:'23:59:59',
+        timeFormat:'H(:mm)',
+        columnFormat:'dddd M/D',
+        firstDay:<%= Time.at(Time.now).wday%>, //today
+        selectable: true,
+        eventClick: function (calEvent, jsEvent, view) {
+
+            $("#dialog").dialog({
+                autoOpen: false,
+
+            }
+
+            );
+        }
+      });
+    });
+  </script>
+
+
+
+ 

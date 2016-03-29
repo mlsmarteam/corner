@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160321200051) do
+ActiveRecord::Schema.define(version: 20160326021500) do
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "starttime"
+    t.datetime "endtime"
+    t.text     "description"
+    t.integer  "user_id"
+    t.integer  "field_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.boolean  "all_day"
+    t.integer  "event_series_id"
+  end
+
+  add_index "events", ["field_id"], name: "index_events_on_field_id"
+  add_index "events", ["user_id"], name: "index_events_on_user_id"
 
   create_table "fields", force: :cascade do |t|
     t.string   "name"
@@ -23,6 +39,29 @@ ActiveRecord::Schema.define(version: 20160321200051) do
   end
 
   add_index "fields", ["user_id"], name: "index_fields_on_user_id"
+
+  create_table "fullcalendar_engine_event_series", force: :cascade do |t|
+    t.integer  "frequency",  default: 1
+    t.string   "period",     default: "monthly"
+    t.datetime "starttime"
+    t.datetime "endtime"
+    t.boolean  "all_day",    default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "fullcalendar_engine_events", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "starttime"
+    t.datetime "endtime"
+    t.boolean  "all_day",         default: false
+    t.text     "description"
+    t.integer  "event_series_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fullcalendar_engine_events", ["event_series_id"], name: "index_fullcalendar_engine_events_on_event_series_id"
 
   create_table "microposts", force: :cascade do |t|
     t.text     "content"

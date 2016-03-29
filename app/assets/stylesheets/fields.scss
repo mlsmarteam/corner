@@ -1,3 +1,28 @@
 // Place all the styles related to the Fields controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+  .fc-widget-header{
+    background-color:#428bca;
+    color:#fff;
+    border: 1px solid #428bca;
+
+  }
+  .fc-widget-content {  /* <td>, usually */
+    border: 1px solid #428bca;
+  }
+  .fc-state-highlight { /* <td> today cell */ /* TODO: add .fc-today to <th> */
+    background: #95C8F4;
+  }
+
+  .fc-unthemed .fc-today {
+    background: #95c8f4;
+  }
+  
+  .fc-cell-overlay { /* semi-transparent rectangle while dragging */
+    background: #9cf;
+    opacity: .2;
+    filter: alpha(opacity=20); /* for IE */
+  }
+
+  

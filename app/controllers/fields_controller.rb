@@ -32,9 +32,10 @@ class FieldsController < ApplicationController
     end
   end
 
-
   def show
+    
     @field=Field.find(params[:id])
+    
   end
 
   def destroy

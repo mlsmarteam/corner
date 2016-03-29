@@ -1,6 +1,19 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
+
+/* header */
+.navbar-inverse {
+    background-color:blue;
+    border-color: #090909;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #ffffff;
+}
+
+
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
