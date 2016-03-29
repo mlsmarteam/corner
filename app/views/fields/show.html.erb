@@ -32,26 +32,10 @@
   
   
 </div>
-<button id='dd'>AQUI</button>
-
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
-
-<button id="opener">open the dialog</button>
-<div id="dialog1" title="Dialog Title" hidden="hidden">I'm a dialog</div>
-
 
 
 <div class='calendar'></div>
-<div id="dialog" title="My dialog" style="display:none">
-    <form>
-        <fieldset>
-            <label for="Id">Id</label>
-            <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
-            <label for="Id">Title</label>
-            <input type="text" name="title" id="title" class="text ui-widget-content ui-corner-all">
-        </fieldset>
-    </form>
-</div>
+
 
 <script type = "text/javascript">
   /*
@@ -106,23 +90,6 @@
 $(document).ready(function() {
 
 
-    $(function () {
-  $( "#dialog1" ).dialog({
-    autoOpen: false
-  });
-  
-  $("#opener").click(function() {
-    $("#dialog1").dialog('open');
-  });
-});
-    // page is now ready, initialize the calendar..
-    $('#dialog').on('click',function(){
-        $("#dds").dialog({
-                autoOpen: false,
-
-            });
-    });
-
     $('.calendar').fullCalendar({
         // put your options and callbacks here
          theme: false,
@@ -148,16 +115,7 @@ $(document).ready(function() {
         timeFormat:'H(:mm)',
         columnFormat:'dddd M/D',
         firstDay:<%= Time.at(Time.now).wday%>, //today
-        selectable: true,
-        eventClick: function (calEvent, jsEvent, view) {
-
-            $("#dialog").dialog({
-                autoOpen: false,
-
-            }
-
-            );
-        }
+        selectable: true
       });
     });
   </script>
